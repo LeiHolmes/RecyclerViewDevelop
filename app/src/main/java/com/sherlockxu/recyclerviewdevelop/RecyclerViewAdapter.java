@@ -3,10 +3,7 @@ package com.sherlockxu.recyclerviewdevelop;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.List;
 
@@ -53,71 +50,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ((AbstractViewHolder) holder).bindData(list.get(position));
-    }
-
-    /**
-     * 不同ViewHolder的抽象类
-     */
-    abstract class AbstractViewHolder extends RecyclerView.ViewHolder {
-
-        public AbstractViewHolder(View itemView) {
-            super(itemView);
-        }
-
-        public abstract void bindData(DataBean bean);
-    }
-
-    class MyViewHolder1 extends AbstractViewHolder {
-        TextView tvName;
-
-        public MyViewHolder1(View itemView) {
-            super(itemView);
-            tvName = (TextView) itemView.findViewById(R.id.item_tv_name);
-        }
-
-        @Override
-        public void bindData(DataBean bean) {
-            tvName.setText(bean.getName());
-        }
-    }
-
-    class MyViewHolder2 extends AbstractViewHolder {
-        TextView tvName;
-        ImageView ivHead;
-
-        public MyViewHolder2(View itemView) {
-            super(itemView);
-            tvName = (TextView) itemView.findViewById(R.id.item_tv_name);
-            ivHead = (ImageView) itemView.findViewById(R.id.item_iv_head);
-        }
-
-        @Override
-        public void bindData(DataBean bean) {
-            tvName.setText(bean.getName());
-            ivHead.setImageResource(bean.getHeadColor());
-        }
-    }
-
-    class MyViewHolder3 extends AbstractViewHolder {
-        TextView tvName;
-        TextView tvcContent;
-        ImageView ivHead;
-        ImageView ivContent;
-
-        public MyViewHolder3(View itemView) {
-            super(itemView);
-            tvName = (TextView) itemView.findViewById(R.id.item_tv_name);
-            tvcContent = (TextView) itemView.findViewById(R.id.item_tv_content);
-            ivHead = (ImageView) itemView.findViewById(R.id.item_iv_head);
-            ivContent = (ImageView) itemView.findViewById(R.id.item_iv_content);
-        }
-
-        @Override
-        public void bindData(DataBean bean) {
-            tvName.setText(bean.getName());
-            tvcContent.setText(bean.getContentName());
-            ivHead.setImageResource(bean.getHeadColor());
-            ivContent.setImageResource(bean.getContentColor());
-        }
     }
 }
