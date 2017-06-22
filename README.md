@@ -1,2 +1,2 @@
 # RecyclerViewDevelop
-RecyclerView多种布局实现进阶篇
+RecyclerView实现ListView，GridView，横向列表，瀑布流等多种效果。
