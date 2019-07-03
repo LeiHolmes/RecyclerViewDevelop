@@ -22,9 +22,14 @@ import butterknife.ButterKnife;
 public class LinkScrollPlusActivity extends AppCompatActivity {
     @BindView(R.id.ll_container)
     LinearLayout llContainer;
+    @BindView(R.id.rv_hori_list)
+    RecyclerView rvHoriList;
     private HashSet<RecyclerView> observerList = new HashSet<>();
     private List<DemandModel> demandList;
+    private List<HoriDataModel> horiList;
     private List<List<String>> showList;
+
+    private HoriListAdapter mHoriAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +56,38 @@ public class LinkScrollPlusActivity extends AppCompatActivity {
             itemList.add(demandModel.getOperate());
             showList.add(itemList);
         }
+
+        horiList = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            HoriDataModel horiDataModel = new HoriDataModel();
+            horiDataModel.setDate("2018.12.27  12:30-13:3" + i);
+            horiDataModel.setPlaceName("大型会议厅" + i);
+            horiDataModel.setPeoples("" + (i + 10));
+            horiDataModel.setSubject("会议主题" + i);
+            horiDataModel.setPlaceRemark("会场要求" + i);
+            horiDataModel.setFoodRemark("餐饮要求" + i);
+            horiDataModel.setRoomRemark("客房要求" + i);
+            horiDataModel.setRequirement("备注" + i);
+            horiDataModel.setDeposit("订金：" + i);
+            if (i == 2) {
+                horiDataModel.setPlaceName("大型会议厅啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" + i);
+            }
+            horiList.add(horiDataModel);
+        }
     }
 
     private void initView() {
         for (List<String> itemList : showList) {
             initRecyclerView(itemList);
         }
+
+        mHoriAdapter = new HoriListAdapter(this);
+        rvHoriList.setAdapter(mHoriAdapter);
+        rvHoriList.setHasFixedSize(true);
+        rvHoriList.setNestedScrollingEnabled(false);
+        rvHoriList.setItemAnimator(new DefaultItemAnimator());
+        rvHoriList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        mHoriAdapter.setList(horiList);
     }
 
     private void initListener() {
